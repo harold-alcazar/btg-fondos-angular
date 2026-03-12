@@ -5,6 +5,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { firstValueFrom } from 'rxjs';
+import { APP_MESSAGES } from '../../core/constants/messages';
 import { Fund } from '../../core/models/domain';
 import { PortfolioService } from '../../core/services/portfolio';
 import { DataTable } from '../../shared/data-table/data-table';
@@ -26,6 +27,7 @@ import type { SubscribeDialogResult } from './subscribe-dialog/subscribe-dialog'
 })
 export class FundsPage {
   readonly portfolio = inject(PortfolioService);
+  readonly messages = APP_MESSAGES;
   private readonly snackBar = inject(MatSnackBar);
   private readonly dialog = inject(MatDialog);
 
@@ -60,12 +62,12 @@ export class FundsPage {
 
     await this.portfolio.subscribeToFund(fund, result.notificationMethod);
     if (this.portfolio.actionError()) {
-      this.snackBar.open(this.portfolio.actionError(), 'Cerrar', {
+      this.snackBar.open(this.portfolio.actionError(), this.messages.actions.close, {
         duration: 3500
       });
       return;
     }
-    this.snackBar.open(`Suscripcion exitosa a ${fund.name}`, 'OK', {
+    this.snackBar.open(this.messages.success.subscribe(fund.name), this.messages.actions.ok, {
       duration: 2500
     });
   }
@@ -87,12 +89,12 @@ export class FundsPage {
 
     await this.portfolio.cancelFund(fund);
     if (this.portfolio.actionError()) {
-      this.snackBar.open(this.portfolio.actionError(), 'Cerrar', {
+      this.snackBar.open(this.portfolio.actionError(), this.messages.actions.close, {
         duration: 3500
       });
       return;
     }
-    this.snackBar.open(`Cancelacion exitosa en ${fund.name}`, 'OK', {
+    this.snackBar.open(this.messages.success.cancel(fund.name), this.messages.actions.ok, {
       duration: 2500
     });
   }

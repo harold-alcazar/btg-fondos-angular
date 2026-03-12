@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { firstValueFrom, forkJoin } from 'rxjs';
+import { APP_MESSAGES } from '../constants/messages';
 import {
   Fund,
   NotificationMethod,
@@ -52,7 +53,7 @@ export class PortfolioService {
       );
       this.balance.set(result.user.amount);
     } catch {
-      this.pageError.set('No fue posible cargar la informacion inicial.');
+      this.pageError.set(APP_MESSAGES.errors.loadInitialData);
     } finally {
       this.loading.set(false);
     }
@@ -65,13 +66,11 @@ export class PortfolioService {
     this.actionError.set('');
 
     if (this.subscribedFundIds().has(fund.id)) {
-      this.actionError.set('Ya te encuentras suscrito a este fondo.');
+      this.actionError.set(APP_MESSAGES.errors.alreadySubscribed);
       return;
     }
     if (this.balance() < fund.minimumAmount) {
-      this.actionError.set(
-        'No tiene saldo disponible para vincularse al fondo.'
-      );
+      this.actionError.set(APP_MESSAGES.errors.insufficientBalance);
       return;
     }
 
@@ -103,7 +102,7 @@ export class PortfolioService {
 
       await this.loadAll();
     } catch {
-      this.actionError.set('No fue posible completar la suscripcion.');
+      this.actionError.set(APP_MESSAGES.errors.subscribeFailed);
     } finally {
       this.actionLoading.set(false);
     }
@@ -114,7 +113,7 @@ export class PortfolioService {
 
     const position = this.positions().find((entry) => entry.fundId === fund.id);
     if (!position) {
-      this.actionError.set('No existe una suscripcion activa para este fondo.');
+      this.actionError.set(APP_MESSAGES.errors.noActiveSubscription);
       return;
     }
 
@@ -140,7 +139,7 @@ export class PortfolioService {
 
       await this.loadAll();
     } catch {
-      this.actionError.set('No fue posible cancelar el fondo.');
+      this.actionError.set(APP_MESSAGES.errors.cancelFailed);
     } finally {
       this.actionLoading.set(false);
     }

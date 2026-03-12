@@ -89,7 +89,7 @@ describe('FundsPage', () => {
       'email'
     );
     expect(snackBarMock.open).toHaveBeenCalledWith(
-      'Suscripcion exitosa a FPV_TEST',
+      'Suscripción exitosa a FPV_TEST',
       'OK',
       { duration: 2500 }
     );

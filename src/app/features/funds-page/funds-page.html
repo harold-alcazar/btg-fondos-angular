@@ -1,6 +1,6 @@
 <section class="header">
   <h1>Fondos disponibles</h1>
-  <p>Gestiona suscripciones y cancelaciones con validacion de saldo minimo.</p>
+  <p>Gestiona suscripciones y cancelaciones con validación de saldo mínimo.</p>
 </section>
 
 <app-data-table
@@ -16,12 +16,12 @@
     </ng-container>
 
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <th mat-header-cell *matHeaderCellDef>Categoría</th>
       <td mat-cell *matCellDef="let fund">{{ fund.category }}</td>
     </ng-container>
 
     <ng-container matColumnDef="minimumAmount">
-      <th mat-header-cell *matHeaderCellDef>Monto minimo</th>
+      <th mat-header-cell *matHeaderCellDef>Monto mínimo</th>
       <td mat-cell *matCellDef="let fund">
         {{ fund.minimumAmount | currency : 'COP' : 'symbol' : '1.0-0' }}
       </td>

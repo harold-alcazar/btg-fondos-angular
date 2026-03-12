@@ -1,0 +1,19 @@
+@if (loading()) {
+  <div class="loading-wrapper">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (error()) {
+  <mat-card class="error-card">
+    {{ error() }}
+  </mat-card>
+} @else if (empty()) {
+  <mat-card class="empty-card">
+    {{ emptyMessage() }}
+  </mat-card>
+} @else {
+  <mat-card>
+    <div class="table-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </mat-card>
+}

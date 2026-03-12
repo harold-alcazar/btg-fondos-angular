@@ -1,0 +1,21 @@
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.error-card {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  color: #7f1d1d;
+  padding: 1rem;
+}
+
+.empty-card {
+  color: #334155;
+  padding: 1rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}

@@ -1,0 +1,69 @@
+<section class="header">
+  <h1>Fondos disponibles</h1>
+  <p>Gestiona suscripciones y cancelaciones con validacion de saldo minimo.</p>
+</section>
+
+<app-data-table
+  [loading]="portfolio.loading()"
+  [error]="portfolio.pageError()"
+  [empty]="portfolio.funds().length === 0"
+  emptyMessage="No hay fondos disponibles."
+>
+  <table mat-table [dataSource]="portfolio.funds()" class="funds-table">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let fund">{{ fund.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <td mat-cell *matCellDef="let fund">{{ fund.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="minimumAmount">
+      <th mat-header-cell *matHeaderCellDef>Monto minimo</th>
+      <td mat-cell *matCellDef="let fund">
+        {{ fund.minimumAmount | currency : 'COP' : 'symbol' : '1.0-0' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let fund">
+        @if (isSubscribed(fund.id)) {
+          <span class="status subscribed">Suscrito</span>
+        } @else {
+          <span class="status not-subscribed">No suscrito</span>
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let fund">
+        @if (!isSubscribed(fund.id)) {
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="portfolio.actionLoading()"
+            (click)="openSubscribeDialog(fund)"
+          >
+            Suscribirse
+          </button>
+        } @else {
+          <button
+            mat-stroked-button
+            color="warn"
+            [disabled]="portfolio.actionLoading()"
+            (click)="openCancelDialog(fund)"
+          >
+            Cancelar
+          </button>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</app-data-table>

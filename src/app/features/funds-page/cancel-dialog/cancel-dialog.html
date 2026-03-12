@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Cancelar suscripcion</h2>
+
+<mat-dialog-content>
+  <p>Vas a cancelar tu participacion en este fondo:</p>
+  <p><strong>{{ data.fund.name }}</strong></p>
+  <p>
+    Monto asociado:
+    {{ data.fund.minimumAmount | currency : 'COP' : 'symbol' : '1.0-0' }}
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Volver</button>
+  <button mat-flat-button color="warn" (click)="confirm()">
+    Confirmar cancelacion
+  </button>
+</mat-dialog-actions>

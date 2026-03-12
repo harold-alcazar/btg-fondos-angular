@@ -1,0 +1,11 @@
+<mat-toolbar class="topbar" color="primary">
+  <div class="left">
+    <span class="brand">BTG Fondos</span>
+    <a mat-button routerLink="/fondos" routerLinkActive="active">Fondos</a>
+    <a mat-button routerLink="/transacciones" routerLinkActive="active">
+      Historial
+    </a>
+  </div>
+  <span class="spacer"></span>
+  <span class="balance">Saldo: {{ balance() | currency : 'COP' : 'symbol' : '1.0-0' }}</span>
+</mat-toolbar>

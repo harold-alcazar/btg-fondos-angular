@@ -1,0 +1,29 @@
+.header {
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  margin-bottom: 0.2rem;
+}
+
+.funds-table {
+  min-width: 760px;
+  width: 100%;
+}
+
+.status {
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+}
+
+.subscribed {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.not-subscribed {
+  background: #eceff1;
+  color: #37474f;
+}

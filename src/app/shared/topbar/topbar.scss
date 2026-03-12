@@ -1,0 +1,27 @@
+.topbar {
+  display: flex;
+}
+
+.left {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.brand {
+  font-weight: 700;
+  margin-right: 0.75rem;
+}
+
+.active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.balance {
+  font-weight: 600;
+}
